@@ -13,6 +13,14 @@
             >
           </div>
           <div class="control">
+            <input
+              v-model="newDueUntil"
+              class="input"
+              type="datetime-local"
+              placeholder="Due until (optional)"
+            >
+          </div>
+          <div class="control">
             <button class="button is-primary" type="submit">
               <span class="icon">
                 <i class="fas fa-plus"></i>
@@ -37,37 +45,13 @@
     </div>
 
     <div v-else>
-      <div 
-        v-for="todo in todos" 
-        :key="todo.id" 
-        class="box"
-      >
-        <div class="columns is-vcentered is-mobile">
-          <div class="column">
-            <label class="checkbox">
-              <input 
-                type="checkbox" 
-                :checked="todo.completed" 
-                @change="toggleStatus(todo)"
-                class="mr-2"
-              >
-              <span :class="{ 'has-text-grey-light line-through': todo.completed }">
-                {{ todo.title }}
-              </span>
-            </label>
-          </div>
-          <div class="column is-narrow">
-            <button 
-              @click="deleteTodo(todo.id)" 
-              class="button is-small is-danger is-outlined"
-            >
-              <span class="icon">
-                <i class="fas fa-trash"></i>
-              </span>
-            </button>
-          </div>
-        </div>
-      </div>
+      <TodoItem
+        v-for="todo in todos"
+        :key="todo.id"
+        :todo="todo"
+        @toggle="toggleStatus"
+        @delete="deleteTodo"
+      />
     </div>
   </div>
 </template>
@@ -75,13 +59,16 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import { Todo, TodoCreate } from '../types'
+import TodoItem from './TodoItem.vue'
 
 export default defineComponent({
   name: 'TodoList',
+  components: { TodoItem },
   data() {
     return {
       todos: [] as Todo[],
       newTodo: '',
+      newDueUntil: '',
       loading: true,
       error: null as string | null
     }
@@ -112,7 +99,8 @@ export default defineComponent({
       try {
         const todoData: TodoCreate = {
           title: this.newTodo,
-          completed: false
+          completed: false,
+          due_until: this.newDueUntil ? new Date(this.newDueUntil).toISOString() : null
         }
         
         const response = await fetch('/api/todos', {
@@ -130,6 +118,7 @@ export default defineComponent({
         const newTodo: Todo = await response.json()
         this.todos.push(newTodo)
         this.newTodo = ''
+        this.newDueUntil = ''
       } catch (err) {
         this.error = `Error adding todo: ${(err as Error).message}`
         console.error(err)

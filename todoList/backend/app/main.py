@@ -54,7 +54,7 @@ def update_todo(todo_id: int, todo: schemas.TodoUpdate, db: Session = Depends(ge
         raise HTTPException(status_code=404, detail="Todo not found")
     
     # Update todo attributes
-    for key, value in todo.dict().items():
+    for key, value in todo.dict(exclude_unset=True).items():
         setattr(db_todo, key, value)
     
     db.commit()
