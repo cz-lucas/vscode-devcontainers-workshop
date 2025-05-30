@@ -1,0 +1,13 @@
+{
+    "name": "Backend",
+    "service": "backend",
+    "dockerComposeFile": [
+        "../../docker-compose.yaml"
+    ],
+    "forwardPorts": [
+        8000
+    ],
+    "postCreateCommand": "cd /backend ; npm install",
+    "shutdownAction": "none",
+    "workspaceFolder": "/workspace"
+}
