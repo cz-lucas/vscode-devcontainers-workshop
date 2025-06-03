@@ -80,7 +80,7 @@ export default defineComponent({
     async fetchTodos(): Promise<void> {
       this.loading = true
       try {
-        const response = await fetch('/api/todos')
+        const response = await fetch(`${import.meta.env.VITE_API_ENDPOINT}/api/todos`);
         if (!response.ok) {
           throw new Error('Failed to fetch todos')
         }
@@ -103,7 +103,7 @@ export default defineComponent({
           due_until: this.newDueUntil ? new Date(this.newDueUntil).toISOString() : null
         }
         
-        const response = await fetch('/api/todos', {
+        const response = await fetch(`${import.meta.env.VITE_API_ENDPOINT}/api/todos`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -126,7 +126,7 @@ export default defineComponent({
     },
     async toggleStatus(todo: Todo): Promise<void> {
       try {
-        const response = await fetch(`/api/todos/${todo.id}`, {
+        const response = await fetch(`${import.meta.env.VITE_API_ENDPOINT}/api/todos/${todo.id}`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json'
@@ -150,7 +150,7 @@ export default defineComponent({
     },
     async deleteTodo(id: number): Promise<void> {
       try {
-        const response = await fetch(`/api/todos/${id}`, {
+        const response = await fetch(`${import.meta.env.VITE_API_ENDPOINT}/api/todos/${id}`, {
           method: 'DELETE'
         })
         

@@ -10,7 +10,7 @@ load_dotenv()
 # Database connection
 DATABASE_URL = os.getenv(
     "DATABASE_URL", 
-    "postgresql://postgres:postgres@localhost:5432/todo_db"
+    "postgresql://postgres:postgres@todo_postgres:5432/todo_db"
 )
 
 engine = create_engine(DATABASE_URL)
