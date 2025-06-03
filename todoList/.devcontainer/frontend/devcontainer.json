@@ -7,7 +7,7 @@
     "forwardPorts": [
         5173
     ],
-    "postCreateCommand": "cd /backend ; npm install",
+    "postCreateCommand": "cd frontend ; npm install",
     "shutdownAction": "none",
     "workspaceFolder": "/workspace"
 }

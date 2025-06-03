@@ -1,17 +1,17 @@
 services:
   backend:
-    image: mcr.microsoft.com/devcontainers/python:3-bookworm
+    image: mcr.microsoft.com/devcontainers/python:3.11-bookworm
     volumes:
-      - ./backend:/workspace
-    command: sleep infinty
+      - ./:/workspace
+    command: sleep infinity
     networks:
      - devcontainers
 
   frontend:
     image: mcr.microsoft.com/devcontainers/typescript-node:1-22-bookworm
     volumes:
-      - ./frontend:/workspace
-    command: sleep infinty
+      - ./:/workspace
+    command: sleep infinity
     networks:
       - devcontainers
 
