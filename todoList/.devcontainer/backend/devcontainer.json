@@ -1,0 +1,13 @@
+{
+    "name": "Backend",
+    "service": "backend",
+    "dockerComposeFile": [
+        "../../docker-compose.yaml"
+    ],
+    "forwardPorts": [
+        8000
+    ],
+    "postCreateCommand": "cd backend ; python -m pip install -r requirements.txt",
+    "shutdownAction": "none",
+    "workspaceFolder": "/workspace"
+}

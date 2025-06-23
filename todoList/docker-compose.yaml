@@ -1,0 +1,39 @@
+services:
+  backend:
+    image: mcr.microsoft.com/devcontainers/python:3.11-bookworm
+    volumes:
+      - ./:/workspace
+    command: sleep infinity
+    ports:
+     - 8000:8000
+    networks:
+     - devcontainers
+
+  frontend:
+    image: mcr.microsoft.com/devcontainers/typescript-node:1-22-bookworm
+    volumes:
+      - ./:/workspace
+    command: sleep infinity
+    ports:
+      - 5173:5173
+    networks:
+      - devcontainers
+
+  postgres:
+    image: postgres:15
+    container_name: todo_postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: todo_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - devcontainers
+
+volumes:
+  postgres_data:
+
+networks:
+  devcontainers:
+    driver: bridge

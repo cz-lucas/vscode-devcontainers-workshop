@@ -1,0 +1,13 @@
+{
+    "name": "Frontend",
+    "service": "frontend",
+    "dockerComposeFile": [
+        "../../docker-compose.yaml"
+    ],
+    "forwardPorts": [
+        5173
+    ],
+    "postCreateCommand": "cd frontend ; npm install",
+    "shutdownAction": "none",
+    "workspaceFolder": "/workspace"
+}
