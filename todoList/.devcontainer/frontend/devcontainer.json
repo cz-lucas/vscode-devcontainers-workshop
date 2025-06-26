@@ -9,5 +9,6 @@
     ],
     "postCreateCommand": "cd frontend ; npm install",
     "shutdownAction": "none",
+    "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind"
     "workspaceFolder": "/workspace"
 }
