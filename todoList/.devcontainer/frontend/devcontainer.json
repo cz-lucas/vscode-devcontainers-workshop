@@ -7,7 +7,7 @@
     "forwardPorts": [
         5173
     ],
-    "postCreateCommand": "cd frontend ; npm install",
+    "postCreateCommand": "sudo chmod -R 777 /workspace/frontend/node_modules ; cd frontend ; npm install",
     "shutdownAction": "none",
     "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind",
     "workspaceFolder": "/workspace",
@@ -17,5 +17,8 @@
                 "Vue.volar"
             ]
         }
-    }
+    },
+    "mounts": [
+        "source=node_cache,target=/workspace/frontend/node_modules"
+    ]
 }

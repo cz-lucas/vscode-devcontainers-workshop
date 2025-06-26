@@ -33,6 +33,7 @@ services:
 
 volumes:
   postgres_data:
+  node_cache:
 
 networks:
   devcontainers:
